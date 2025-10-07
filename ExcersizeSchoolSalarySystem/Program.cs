@@ -9,7 +9,11 @@
             {
                 new Teacher("Alice", 3000, "Math", 5),
                 new CourseAdministrator("Bob", 3500, 3),
-                new Administrator("Charlie", 4000, "HR")
+                new Administrator("Charlie", 4000, "HR"),
+                new Teacher("David", 3200, "Science", 4),
+                new CourseAdministrator("Eve", 3600, 2)
+
+
             };
             
             bool run= true;
