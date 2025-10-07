@@ -24,14 +24,14 @@ namespace ExcersizeSchoolSalarySystem
         {
            foreach (var e in employees)
            {
-                e.CalculateSalary();
-                Console.WriteLine(e.ToString());
+
+                Console.WriteLine($"Name: {e.Name}, Before taxes: {e.BaseSalary:C}, After taxes: {e.CalculatedSalary:C}");
             }
         } 
 
         public static decimal TotalSalaryExpense(List<EmployeeBase> employees)
         {
-            return employees.Sum(e => e.CalculateSalary());
+            return employees.Sum(e => e.CalculatedSalary);
         }
 
         

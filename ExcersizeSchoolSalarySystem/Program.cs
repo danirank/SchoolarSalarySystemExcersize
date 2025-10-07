@@ -29,12 +29,12 @@
                 Console.Clear();
                 Console.WriteLine("[1] Show all employees");
                 Console.WriteLine("[2] Add employee");
-                Console.WriteLine("[3] Pay salaries and show total salry expenses");
-                Console.WriteLine("[4] Find employee");
+                Console.WriteLine("[3] Pay salaries and show total salary expenses");
+                Console.WriteLine("[4] Update salary");
                 Console.WriteLine("[5] Remove employee");
                 Console.WriteLine("[6] Save employees to txt file");
                 Console.WriteLine("[7] Exit");
-                Console.Write("Select 1,2 or 3: ");
+                Console.Write("Choice: ");
                 string choice = Console.ReadLine();
                 switch (choice)
                 {
@@ -83,7 +83,7 @@
 
 
                     default:
-                        Console.WriteLine("Invalid choice. Please select 1, 2 or 3.");
+                        Console.WriteLine("Invalid choice. Please select 1,2,3,4,5,6,7.");
                         break;
                 }
 
