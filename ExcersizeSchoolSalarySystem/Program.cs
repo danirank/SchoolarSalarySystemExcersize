@@ -7,19 +7,17 @@
 
             //List<EmployeeBase> employees = new List<EmployeeBase>()
             //{
-            //    new Teacher("Alice", 3000, "Math", 5),
-            //    new CourseAdministrator("Bob", 3500, 3),
-            //    new Administrator("Charlie", 4000, "HR"),
-            //    new Teacher("David", 3200, "Science", 4),
-            //    new CourseAdministrator("Eve", 3600, 2),
-            //    new Administrator("Frank", 4500, "IT"),
+            //    new Teacher("Alice", 30000, "Math", 5),
+            //    new CourseAdministrator("Bob", 35000, 3),
+            //    new Administrator("Charlie", 40000, "HR"),
+            //    new Teacher("David", 32000, "Science", 4),
+            //    new CourseAdministrator("Eve", 36000, 2),
+            //    new Administrator("Frank", 45000, "IT"),
             //    new Teacher("Grace", 3100, "English", 6),
-            //    new CourseAdministrator("Hannah", 3700, 4),
-            //    new Administrator("Ian", 4200, "Finance"),
-            //    new Teacher("Jack", 3300, "History", 3),
-            //    new Teacher("Karen", 3400, "Art", 2)
-
-
+            //    new CourseAdministrator("Hannah", 37000, 4),
+            //    new Administrator("Ian", 42000, "Finance"),
+            //    new Teacher("Jack", 33000, "History", 3),
+            //    new Teacher("Karen", 34000, "Art", 2)
             //};
 
             List<EmployeeBase> employees = TxtHandler.LoadFromTxt("employees.txt");
@@ -56,9 +54,10 @@
                         PressAnyKey();
                         break;
                     case "4":
-
-
-                        SearchEmployee(employees);
+                        //SearchEmployee(employees);
+                        UpdateSalary(employees);
+                        TxtHandler.SaveToTxt("employees.txt", employees);   
+                        employees = TxtHandler.LoadFromTxt("employees.txt");
                         PressAnyKey();
 
                         break;
@@ -71,6 +70,7 @@
                         case "6":
                         Console.WriteLine("Save to txt");
                         TxtHandler.SaveToTxt("employees.txt", employees);
+                        employees = TxtHandler.LoadFromTxt("employees.txt");
                         PressAnyKey();
                         break;
                    
@@ -173,7 +173,7 @@
             }
             return value;
         }
-        public static void SearchEmployee(List<EmployeeBase> employees)
+        public static EmployeeBase SearchEmployee(List<EmployeeBase> employees)
         {
             Console.Write("Enter employee name to search: ");
             string name = Console.ReadLine();
@@ -186,6 +186,7 @@
             {
                 Console.WriteLine("Employee not found.");
             }
+            return employee;
         }
 
         public static void RemoveEmployee(List<EmployeeBase> employees)
@@ -238,6 +239,27 @@
                     Console.WriteLine("Invalid choice.");
                     break;
             }
+        }
+
+        public static void UpdateSalary(List<EmployeeBase> emp)
+        {
+            Console.WriteLine("---Update employee base salary---");
+            var employee = SearchEmployee(emp);
+            if (employee == null)
+            {
+                return;
+            }
+            Console.WriteLine();
+            Console.Write("Enter new salary (before tax and bonus): ");
+            decimal newSalary = ValidDecimal();
+
+            employee.BaseSalary = newSalary;
+            employee.CalculatedSalary = employee.CalculateSalary();
+
+            Console.WriteLine($"{employee.Name}s base salary has been updated to {employee.BaseSalary} ({employee.CalculatedSalary:C} aftter taxes and bonus) ");
+
+
+
         }
     }
 }

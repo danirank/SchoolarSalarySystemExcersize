@@ -12,16 +12,17 @@ namespace ExcersizeSchoolSalarySystem
         public Administrator(string name, decimal baseSalary, string department) : base(name, baseSalary)
         {
             Department = department;
-            
+            CalculatedSalary = CalculateSalary();
         }
 
         public override decimal CalculateSalary()
         {
-            return ( BaseSalary + SalaryCalculator.ApplyBonus(1) ) * SalaryCalculator.ApplyTax() ;
+            decimal baseSalary = BaseSalary;
+            return ( baseSalary + SalaryCalculator.ApplyBonus(1) ) * SalaryCalculator.ApplyTax() ;
         }
         public override string ToString()
         {
-            return $"Admin: {Name}, Department: {Department}, Salary: {CalculateSalary():C}";
+            return $"Admin: {Name}, Department: {Department}, Base salary: {BaseSalary:C}, Salary after bonuses and taxes: {CalculatedSalary:C}";
         }
     }
 }

@@ -18,34 +18,40 @@ namespace ExcersizeSchoolSalarySystem
         }
         public static List<EmployeeBase> LoadFromTxt(string filePath)
         {
-            CultureInfo.CurrentCulture = new CultureInfo("sv-SE");
+           
             var result = new List<EmployeeBase>();
             var fileLines = System.IO.File.ReadAllLines(filePath);
             foreach (var line in fileLines)
             {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
                 var parts = line.Split(",");
                 var role = parts[0].Split(":")[0].Trim();
                 var name = parts[0].Split(":")[1].Trim();
-                decimal salary;
+                decimal baseSalary;
+                decimal calculatedSalary;
 
                 switch (role)
                 {
                     case "Teacher":
                         var subject = parts[1].Split(":")[1].Trim();
                         var classes = int.Parse(parts[2].Split(":")[1].Trim());
-                         salary = decimal.Parse(parts[3].Split(":")[1].Trim().Replace("$", ""));
-                        result.Add(new Teacher(name, salary, subject, classes));
+                         baseSalary = decimal.Parse(parts[3].Split(":")[1].Trim().Replace("kr", ""));
+                        //calculatedSalary = decimal.Parse(parts[4].Split(":")[1].Trim().Replace("kr", ""));
+                        result.Add(new Teacher(name, baseSalary, subject, classes));
                         break;
                     case "Course Admin":
                         var courses = int.Parse(parts[1].Split(":")[1].Trim());
-                         salary = decimal.Parse(parts[2].Split(":")[1].Trim().Replace("$", ""));
-                        result.Add(new CourseAdministrator(name, salary, courses));
+                         baseSalary = decimal.Parse(parts[2].Split(":")[1].Trim().Replace("kr", ""));
+                        //calculatedSalary = decimal.Parse(parts[3].Split(":")[1].Trim().Replace("kr", ""));
+                        result.Add(new CourseAdministrator(name, baseSalary, courses));
                         break;
 
                     case "Admin":
                         var department = parts[1].Split(":")[1].Trim();
-                         salary = decimal.Parse(parts[2].Split(":")[1].Trim().Replace("$", ""));
-                        result.Add(new Administrator(name, salary, department));
+                         baseSalary = decimal.Parse(parts[2].Split(":")[1].Trim().Replace("kr", ""));
+                        //calculatedSalary = decimal.Parse(parts[3].Split(":")[1].Trim().Replace("kr", ""));
+                        result.Add(new Administrator(name, baseSalary, department));
                         break;
                     default:
                         throw new Exception("Unknown role in file.");

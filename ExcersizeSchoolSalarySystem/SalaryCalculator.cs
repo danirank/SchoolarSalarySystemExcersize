@@ -34,6 +34,7 @@ namespace ExcersizeSchoolSalarySystem
             return employees.Sum(e => e.CalculateSalary());
         }
 
+        
 
     }
 }

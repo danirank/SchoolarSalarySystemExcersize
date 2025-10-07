@@ -18,16 +18,18 @@ namespace ExcersizeSchoolSalarySystem
         {
             Subject = subject;
             NumberOfClasses = numberOfClasses;
+            CalculatedSalary = CalculateSalary();
         }
 
         public override decimal CalculateSalary()
         {
-           return ( BaseSalary + SalaryCalculator.ApplyBonus(NumberOfClasses)) * SalaryCalculator.ApplyTax() ;
+            decimal baseSalary = BaseSalary;
+            return ( baseSalary + SalaryCalculator.ApplyBonus(NumberOfClasses)) * SalaryCalculator.ApplyTax() ;
         }
 
         public override string ToString()
         {
-            return $"Teacher: {Name}, Subject: {Subject}, Classes: {NumberOfClasses}, Salary: {CalculateSalary():C}";
+            return $"Teacher: {Name}, Subject: {Subject}, Classes: {NumberOfClasses}, Base salary: {BaseSalary:C}, Salary after bonuses and taxes: {CalculatedSalary:C}";
         }
     }
 }

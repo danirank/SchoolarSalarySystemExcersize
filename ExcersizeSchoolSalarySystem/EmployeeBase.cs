@@ -11,6 +11,8 @@ namespace ExcersizeSchoolSalarySystem
     {
         public string Name { get; set; }
 
+        public decimal CalculatedSalary { get; set; }
+
         private decimal _baseSalary;
         public decimal BaseSalary
         {
@@ -38,8 +40,9 @@ namespace ExcersizeSchoolSalarySystem
         public EmployeeBase(string name, decimal baseSalary)
         {
             Name = name;
-            _baseSalary = baseSalary;
-            
+            BaseSalary = baseSalary;
+            CalculatedSalary = CalculateSalary();
+
         }
 
     
