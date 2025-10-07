@@ -5,18 +5,26 @@
         static void Main(string[] args)
         {
 
-            List<EmployeeBase> employees = new List<EmployeeBase>()
-            {
-                new Teacher("Alice", 3000, "Math", 5),
-                new CourseAdministrator("Bob", 3500, 3),
-                new Administrator("Charlie", 4000, "HR"),
-                new Teacher("David", 3200, "Science", 4),
-                new CourseAdministrator("Eve", 3600, 2)
+            //List<EmployeeBase> employees = new List<EmployeeBase>()
+            //{
+            //    new Teacher("Alice", 3000, "Math", 5),
+            //    new CourseAdministrator("Bob", 3500, 3),
+            //    new Administrator("Charlie", 4000, "HR"),
+            //    new Teacher("David", 3200, "Science", 4),
+            //    new CourseAdministrator("Eve", 3600, 2),
+            //    new Administrator("Frank", 4500, "IT"),
+            //    new Teacher("Grace", 3100, "English", 6),
+            //    new CourseAdministrator("Hannah", 3700, 4),
+            //    new Administrator("Ian", 4200, "Finance"),
+            //    new Teacher("Jack", 3300, "History", 3),
+            //    new Teacher("Karen", 3400, "Art", 2)
 
 
-            };
-            
-            bool run= true;
+            //};
+
+            List<EmployeeBase> employees = TxtHandler.LoadFromTxt("employees.txt");
+
+            bool run = true;
 
             while (run)
             {
@@ -26,13 +34,15 @@
                 Console.WriteLine("[3] Pay salaries and show total salry expenses");
                 Console.WriteLine("[4] Find employee");
                 Console.WriteLine("[5] Remove employee");
-                Console.WriteLine("[6] Exit");
+                Console.WriteLine("[6] Save employees to txt file");
+                Console.WriteLine("[7] Load employees from txt file");
+                Console.WriteLine("[8] Exit");
                 Console.Write("Select 1,2 or 3: ");
                 string choice = Console.ReadLine();
                 switch (choice)
                 {
                     case "1":
-                        
+                        SorterMethod(employees);
                         ListAllEmployees(employees);
                         PressAnyKey();
                         break;
@@ -47,12 +57,12 @@
                         PressAnyKey();
                         break;
                     case "4":
-                       
+
 
                         SearchEmployee(employees);
                         PressAnyKey();
 
-                        break; 
+                        break;
 
                     case "5":
                         RemoveEmployee(employees);
@@ -60,6 +70,15 @@
 
                         break;
                         case "6":
+                        Console.WriteLine("Save to txt");
+                        TxtHandler.SaveToTxt("employees.txt", employees);
+                        PressAnyKey();
+                        break;
+                    case "7":
+                        Console.WriteLine("Load from txt");
+                        
+                        break;
+                    case "8":
 
                         Console.WriteLine("ByeBye");
 
@@ -82,7 +101,7 @@
 
             foreach (var emp in employees)
             {
-                Console.WriteLine($"Name: {emp.Name}, Base Salary: {emp.BaseSalary:C}, Calculated Salary: {emp.CalculateSalary():C}");
+                Console.WriteLine(emp.ToString());
             }
         }
         public static void AddEmployee(List<EmployeeBase> employees)
@@ -99,7 +118,7 @@
             switch (role)
             {
                 case "1":
-                   
+
 
                     Console.Write("Subject: ");
                     string subject = Console.ReadLine();
@@ -131,12 +150,12 @@
 
         }
 
-        public static (string,decimal) NameAndSalary()
+        public static (string, decimal) NameAndSalary()
         {
             Console.Write("Name: ");
-           string name = Console.ReadLine();
+            string name = Console.ReadLine();
             Console.Write("Base Salary: ");
-           decimal baseSalary = ValidDecimal();
+            decimal baseSalary = ValidDecimal();
 
             return (name, baseSalary);
         }
@@ -193,6 +212,36 @@
         {
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
+        }
+
+        public static void SortByName(List<EmployeeBase> emp)
+        {
+            emp = emp.OrderBy(e => e.Name).ToList();
+        }
+
+        public static void SortBySalary(List<EmployeeBase> emp)
+        {
+            emp = emp.OrderBy(e => e.CalculateSalary()).ToList();
+        }
+
+        public static void SorterMethod(List<EmployeeBase> emp)
+        {
+            Console.WriteLine("Sort by: [1] Name [2] Salary [3] None");
+            string choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    SortByName(emp);
+                    break;
+                case "2":
+                    SortBySalary(emp);
+                    break;
+                    case "3":
+                        break;
+                default:
+                    Console.WriteLine("Invalid choice.");
+                    break;
+            }
         }
     }
 }
