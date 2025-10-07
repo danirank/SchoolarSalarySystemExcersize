@@ -35,8 +35,7 @@
                 Console.WriteLine("[4] Find employee");
                 Console.WriteLine("[5] Remove employee");
                 Console.WriteLine("[6] Save employees to txt file");
-                Console.WriteLine("[7] Load employees from txt file");
-                Console.WriteLine("[8] Exit");
+                Console.WriteLine("[7] Exit");
                 Console.Write("Select 1,2 or 3: ");
                 string choice = Console.ReadLine();
                 switch (choice)
@@ -74,11 +73,8 @@
                         TxtHandler.SaveToTxt("employees.txt", employees);
                         PressAnyKey();
                         break;
+                   
                     case "7":
-                        Console.WriteLine("Load from txt");
-                        
-                        break;
-                    case "8":
 
                         Console.WriteLine("ByeBye");
 
